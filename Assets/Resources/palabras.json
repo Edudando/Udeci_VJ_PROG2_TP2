@@ -1,0 +1,54 @@
+{
+  "palabras": [
+    {
+      "palabra": "PELOTA",
+      "dificultad": 1,
+      "imagen": "pelota.png"
+    },
+    {
+      "palabra": "BANANA",
+      "dificultad": 1,
+      "imagen": "banana.png"
+    },
+    {
+      "palabra": "TOMATE",
+      "dificultad": 1,
+      "imagen": "tomate.png"
+    },
+    {
+      "palabra": "ZAPATO",
+      "dificultad": 1,
+      "imagen": "zapato.png"
+    },
+    {
+      "palabra": "CONEJO",
+      "dificultad": 1,
+      "imagen": "conejo.png"
+    },
+    {
+      "palabra": "PATITO",
+      "dificultad": 1,
+      "imagen": "patito.png"
+    },
+    {
+      "palabra": "ABEJAS",
+      "dificultad": 1,
+      "imagen": "abejas.png"
+    },
+    {
+      "palabra": "CABRAS",
+      "dificultad": 1,
+      "imagen": "cabras.png"
+    },
+    {
+      "palabra": "FLORES",
+      "dificultad": 1,
+      "imagen": "flores.png"
+    },
+    {
+      "palabra": "AMIGOS",
+      "dificultad": 1,
+      "imagen": "amigos.png"
+    }
+  ]
+}
