@@ -32,6 +32,7 @@ public class PlayerController3D : MonoBehaviour
     [Header("Altura fija de Nia")]
     [SerializeField] private bool lockHeight = true;
     [SerializeField] private float fixedY = 1f;
+    [SerializeField] private BoxCollider zonaAlturaPuente;
 
     [Header("Interacción")]
     [SerializeField] private float interactRange = 2f;
@@ -81,6 +82,8 @@ public class PlayerController3D : MonoBehaviour
     public int CurrentHealth => health != null ? health.CurrentHealth : 0;
     public int MaxHealth => health != null ? health.MaxHealth : 0;
     private Vector3 Forward => invertForward ? -transform.forward : transform.forward;
+
+
 
     private void Awake()
     {
@@ -160,7 +163,8 @@ public class PlayerController3D : MonoBehaviour
 
     private float GetVerticalVelocity()
     {
-        if (lockHeight || !useGravity)
+        //if (lockHeight || !useGravity)
+        if (!EstaEnZonaDelPuente() && (lockHeight || !useGravity))
         {
             verticalVelocity = 0f;
             return 0f;
@@ -177,7 +181,7 @@ public class PlayerController3D : MonoBehaviour
 
     private void EnforceFixedHeight()
     {
-        if (!lockHeight) return;
+        if (!lockHeight || EstaEnZonaDelPuente()) return;
         verticalVelocity = 0f;
         Vector3 position = transform.position;
         if (position.y == fixedY) return;
@@ -272,6 +276,8 @@ public class PlayerController3D : MonoBehaviour
         projectile.SetProjectileData(activeProjectileData);
         projectileObj.SetActive(true);
         diceInventory.UseDie();
+        if (animator != null)
+            animator.SetTrigger("Shoot");
         if (debugShooting)
             Debug.LogWarning($"[Disparo Nia] Bala activada: {projectileObj.name}. Posición: {spawnPosition}. Dirección: {projectileObj.transform.forward}. Munición: {diceInventory.CurrentDiceCount}.", this);
         ApplyRecoil();
@@ -387,5 +393,20 @@ public class PlayerController3D : MonoBehaviour
         Gizmos.color = Color.red;
         Vector3 attackPoint = transform.position + Forward * (meleeRange * 0.5f);
         Gizmos.DrawWireSphere(attackPoint, meleeRange);
+    }
+
+    private bool EstaEnZonaDelPuente()
+    {
+        if (zonaAlturaPuente == null)
+            return false;
+
+        Vector3 posicionLocal =
+            zonaAlturaPuente.transform.InverseTransformPoint(transform.position)
+            - zonaAlturaPuente.center;
+
+        Vector3 mitad = zonaAlturaPuente.size * 0.5f;
+
+        return Mathf.Abs(posicionLocal.x) <= mitad.x
+            && Mathf.Abs(posicionLocal.z) <= mitad.z;
     }
 }
