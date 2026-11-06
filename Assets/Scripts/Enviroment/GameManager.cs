@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ControladorPalabras controladorPalabras;
     [Tooltip("Arrastrar los seis dados de letras de la escena, uno por elemento.")]
     [SerializeField] private ControladorPalabras[] dadosDeLetras = new ControladorPalabras[6];
+    [Header("Pista grabada")]
+    [SerializeField] private GrabadoPiedra grabadoPiedra;
+
     [Header("Dificultad actual")]
     public int dificultadSeleccionada = 1;
     private ListaPalabras datosJuego;
@@ -44,12 +47,23 @@ public class GameManager : MonoBehaviour
             return;
         }
         ItemPalabra elegida = candidatas[Random.Range(0, candidatas.Count)];
-        ArmarPalabraEnDados(elegida.palabra);
+        ArmarPalabraEnDados(elegida.palabra, elegida.imagen);
     }
 
     // Se conserva el nombre para las referencias existentes.
     public void ArmarPalabraEnDados(string palabra)
     {
+        ItemPalabra item = datosJuego?.palabras?.Find(candidata =>
+            candidata != null && string.Equals(candidata.palabra?.Trim(), palabra?.Trim(),
+                System.StringComparison.OrdinalIgnoreCase));
+        ArmarPalabraEnDados(palabra, item?.imagen);
+    }
+
+    private void ArmarPalabraEnDados(string palabra, string imagen)
+    {
+        if (grabadoPiedra != null)
+            grabadoPiedra.MostrarImagen(imagen);
+
         // Sortear una sola palabra y aplicarla a todas las copias.
         // Se mantiene la referencia anterior por compatibilidad con la escena.
         HashSet<ControladorPalabras> destinos = new HashSet<ControladorPalabras>();

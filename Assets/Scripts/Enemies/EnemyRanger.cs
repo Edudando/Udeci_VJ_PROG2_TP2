@@ -10,6 +10,7 @@
  * y ejecuta ataques cuerpo a cuerpo (Melee) al presionar la barra espaciadora o clic derecho.
  *********************************************************************************************/
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -43,6 +44,13 @@ public class EnemyRanger : MonoBehaviour, IDamageable
     [Tooltip("Incluir las capas de Nia, suelo y paredes.")]
     [SerializeField] private LayerMask hitLayers = ~0;
 
+    [Header("Aviso de ataque")]
+    [Tooltip("Espera mínima desde que aparece el signo hasta el primer disparo de cada ataque.")]
+    [SerializeField, Min(0.05f)] private float attackWarningTime = 0.5f;
+    [Tooltip("Altura del signo sobre la raíz del Slime, en unidades de mundo.")]
+    [SerializeField, Min(0f)] private float attackWarningHeight = 0.9f;
+    [SerializeField, Min(0.1f)] private float attackWarningFontSize = 8f;
+
     [Header("Animator opcional: nombres completos de estados, por ejemplo Base Layer.Idle")]
     [SerializeField] private Animator slimeAnimator;
     [SerializeField] private string idleAnimation = "";
@@ -56,6 +64,7 @@ public class EnemyRanger : MonoBehaviour, IDamageable
     [SerializeField] private float currentHealth;
 
     private NavMeshAgent agent;
+    private GameObject attackWarning;
     private float nextShot;
     private float nextWarning;
     public float CurrentHealth => currentHealth;
@@ -76,6 +85,7 @@ public class EnemyRanger : MonoBehaviour, IDamageable
         if (body != null) body.isKinematic = true;
         currentHealth = Mathf.Max(1f, maxHealth);
         currentState = RangerState.Idle;
+        CreateAttackWarning();
         loseTargetRange = Mathf.Max(loseTargetRange, detectionRange + 0.1f, attackRange + 0.1f);
     }
 
@@ -144,6 +154,36 @@ public class EnemyRanger : MonoBehaviour, IDamageable
         }
     }
 
+    private void CreateAttackWarning()
+    {
+        attackWarning = new GameObject("AvisoAtaque");
+        attackWarning.SetActive(false);
+        attackWarning.transform.SetParent(transform, false);
+
+        TextMeshPro warningText = attackWarning.AddComponent<TextMeshPro>();
+        warningText.text = "!";
+        warningText.fontSize = attackWarningFontSize;
+        warningText.fontStyle = FontStyles.Bold;
+        warningText.color = new Color(1f, 0.78f, 0.12f);
+        warningText.alignment = TextAlignmentOptions.Center;
+    }
+
+    private void BeginAttackWarning()
+    {
+        attackWarning.SetActive(true);
+        nextShot = Mathf.Max(nextShot, Time.time + attackWarningTime);
+    }
+
+    private void LateUpdate()
+    {
+        if (!attackWarning.activeSelf) return;
+
+        attackWarning.transform.position = transform.position + Vector3.up * attackWarningHeight;
+        Camera mainCamera = Camera.main;
+        if (mainCamera != null)
+            attackWarning.transform.rotation = mainCamera.transform.rotation;
+    }
+
     private void Shoot()
     {
         Vector3 origin = firePoint != null ? firePoint.position : transform.position + Vector3.up * 0.5f;
@@ -185,6 +225,11 @@ public class EnemyRanger : MonoBehaviour, IDamageable
     {
         if (currentState == state) return;
         currentState = state;
+        if (state == RangerState.Attack)
+            BeginAttackWarning();
+        else
+            attackWarning.SetActive(false);
+
         switch (state)
         {
             case RangerState.Idle: PlayAnimation(idleAnimation); break;
@@ -210,7 +255,16 @@ public class EnemyRanger : MonoBehaviour, IDamageable
         agent.ResetPath();
     }
 
-    private void OnDisable() { StopAgent(); }
+    private void OnEnable()
+    {
+        if (currentState == RangerState.Attack) BeginAttackWarning();
+    }
+
+    private void OnDisable()
+    {
+        if (attackWarning != null) attackWarning.SetActive(false);
+        StopAgent();
+    }
 
     private void OnDrawGizmosSelected()
     {

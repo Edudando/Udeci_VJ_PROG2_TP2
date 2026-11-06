@@ -3,52 +3,252 @@
     {
       "palabra": "PELOTA",
       "dificultad": 1,
-      "imagen": "pelota.png"
+      "imagen": "01_PELOTA.png"
     },
     {
-      "palabra": "BANANA",
+      "palabra": "ESCOBA",
       "dificultad": 1,
-      "imagen": "banana.png"
+      "imagen": "02_ESCOBA.png"
     },
     {
-      "palabra": "TOMATE",
+      "palabra": "CAMISA",
       "dificultad": 1,
-      "imagen": "tomate.png"
+      "imagen": "03_CAMISA.png"
     },
     {
       "palabra": "ZAPATO",
       "dificultad": 1,
-      "imagen": "zapato.png"
+      "imagen": "04_ZAPATO.png"
+    },
+    {
+      "palabra": "MEDUSA",
+      "dificultad": 1,
+      "imagen": "05_MEDUSA.png"
+    },
+    {
+      "palabra": "CAMIÓN",
+      "dificultad": 1,
+      "imagen": "06_CAMION.png"
+    },
+    {
+      "palabra": "FRASCO",
+      "dificultad": 1,
+      "imagen": "07_FRASCO.png"
+    },
+    {
+      "palabra": "HELADO",
+      "dificultad": 1,
+      "imagen": "08_HELADO.png"
+    },
+    {
+      "palabra": "PASTEL",
+      "dificultad": 1,
+      "imagen": "09_PASTEL.png"
+    },
+    {
+      "palabra": "TURRÓN",
+      "dificultad": 1,
+      "imagen": "10_TURRON.png"
     },
     {
       "palabra": "CONEJO",
       "dificultad": 1,
-      "imagen": "conejo.png"
+      "imagen": "11_CONEJO.png"
     },
     {
-      "palabra": "PATITO",
+      "palabra": "GATITO",
       "dificultad": 1,
-      "imagen": "patito.png"
+      "imagen": "12_GATITO.png"
     },
     {
-      "palabra": "ABEJAS",
+      "palabra": "DELFÍN",
       "dificultad": 1,
-      "imagen": "abejas.png"
+      "imagen": "13_DELFIN.png"
     },
     {
-      "palabra": "CABRAS",
+      "palabra": "MONITO",
       "dificultad": 1,
-      "imagen": "cabras.png"
+      "imagen": "14_MONITO.png"
     },
     {
-      "palabra": "FLORES",
+      "palabra": "IGUANA",
       "dificultad": 1,
-      "imagen": "flores.png"
+      "imagen": "15_IGUANA.png"
     },
     {
-      "palabra": "AMIGOS",
+      "palabra": "PALOMA",
       "dificultad": 1,
-      "imagen": "amigos.png"
+      "imagen": "16_PALOMA.png"
+    },
+    {
+      "palabra": "CASTOR",
+      "dificultad": 1,
+      "imagen": "17_CASTOR.png"
+    },
+    {
+      "palabra": "GRILLO",
+      "dificultad": 1,
+      "imagen": "18_GRILLO.png"
+    },
+    {
+      "palabra": "GUSANO",
+      "dificultad": 1,
+      "imagen": "19_GUSANO.png"
+    },
+    {
+      "palabra": "PÁJARO",
+      "dificultad": 1,
+      "imagen": "20_PAJARO.png"
+    },
+    {
+      "palabra": "BOSQUE",
+      "dificultad": 1,
+      "imagen": "21_BOSQUE.png"
+    },
+    {
+      "palabra": "JARDÍN",
+      "dificultad": 1,
+      "imagen": "22_JARDIN.png"
+    },
+    {
+      "palabra": "PLANTA",
+      "dificultad": 1,
+      "imagen": "23_PLANTA.png"
+    },
+    {
+      "palabra": "TRONCO",
+      "dificultad": 1,
+      "imagen": "24_TRONCO.png"
+    },
+    {
+      "palabra": "LAGUNA",
+      "dificultad": 1,
+      "imagen": "25_LAGUNA.png"
+    },
+    {
+      "palabra": "CAMINO",
+      "dificultad": 1,
+      "imagen": "26_CAMINO.png"
+    },
+    {
+      "palabra": "PUENTE",
+      "dificultad": 1,
+      "imagen": "27_PUENTE.png"
+    },
+    {
+      "palabra": "PIEDRA",
+      "dificultad": 1,
+      "imagen": "28_PIEDRA.png"
+    },
+    {
+      "palabra": "MACETA",
+      "dificultad": 1,
+      "imagen": "29_MACETA.png"
+    },
+    {
+      "palabra": "RAMITA",
+      "dificultad": 1,
+      "imagen": "30_RAMITA.png"
+    },
+    {
+      "palabra": "TOMATE",
+      "dificultad": 1,
+      "imagen": "31_TOMATE.png"
+    },
+    {
+      "palabra": "BANANA",
+      "dificultad": 1,
+      "imagen": "32_BANANA.png"
+    },
+    {
+      "palabra": "CEREZA",
+      "dificultad": 1,
+      "imagen": "33_CEREZA.png"
+    },
+    {
+      "palabra": "POMELO",
+      "dificultad": 1,
+      "imagen": "34_POMELO.png"
+    },
+    {
+      "palabra": "SANDÍA",
+      "dificultad": 1,
+      "imagen": "35_SANDIA.png"
+    },
+    {
+      "palabra": "NARVAL",
+      "dificultad": 1,
+      "imagen": "36_NARVAL.png"
+    },
+    {
+      "palabra": "PEPINO",
+      "dificultad": 1,
+      "imagen": "37_PEPINO.png"
+    },
+    {
+      "palabra": "ACELGA",
+      "dificultad": 1,
+      "imagen": "38_ACELGA.png"
+    },
+    {
+      "palabra": "ACEITE",
+      "dificultad": 1,
+      "imagen": "39_ACEITE.png"
+    },
+    {
+      "palabra": "SARTÉN",
+      "dificultad": 1,
+      "imagen": "40_SARTEN.png"
+    },
+    {
+      "palabra": "CARTÓN",
+      "dificultad": 1,
+      "imagen": "41_CARTON.png"
+    },
+    {
+      "palabra": "LECTOR",
+      "dificultad": 1,
+      "imagen": "42_LECTOR.png"
+    },
+    {
+      "palabra": "PINTOR",
+      "dificultad": 1,
+      "imagen": "43_PINTOR.png"
+    },
+    {
+      "palabra": "PINCEL",
+      "dificultad": 1,
+      "imagen": "44_PINCEL.png"
+    },
+    {
+      "palabra": "CRAYÓN",
+      "dificultad": 1,
+      "imagen": "45_CRAYON.png"
+    },
+    {
+      "palabra": "TIJERA",
+      "dificultad": 1,
+      "imagen": "46_TIJERA.png"
+    },
+    {
+      "palabra": "PÁGINA",
+      "dificultad": 1,
+      "imagen": "47_PAGINA.png"
+    },
+    {
+      "palabra": "RECREO",
+      "dificultad": 1,
+      "imagen": "48_RECREO.png"
+    },
+    {
+      "palabra": "MESITA",
+      "dificultad": 1,
+      "imagen": "49_MESITA.png"
+    },
+    {
+      "palabra": "REGLÓN",
+      "dificultad": 1,
+      "imagen": "50_REGLON.png"
     }
   ]
 }
