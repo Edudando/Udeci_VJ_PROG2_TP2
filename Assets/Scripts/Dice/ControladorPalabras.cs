@@ -16,6 +16,21 @@ public class ControladorPalabras : MonoBehaviour
     public List<LetraData> diccionarioLetras = new List<LetraData>();
     public string PalabraActual { get; private set; }
 
+    // El GameManager llama con la palabra candidata ya normalizada.
+    public bool TieneTexturasPara(string palabra, out char letraFaltante)
+    {
+        foreach (char letra in palabra)
+        {
+            if (BuscarTexturaDeLetra(letra) != null) continue;
+
+            letraFaltante = letra;
+            return false;
+        }
+
+        letraFaltante = '\0';
+        return true;
+    }
+
     public void MostrarPalabra(string palabra)
     {
         if (string.IsNullOrWhiteSpace(palabra))

@@ -8,6 +8,7 @@ Shader "Nia/GrabadoPiedra"
         [HideInInspector] _EjeU ("Eje U", Vector) = (1, 0, 0, 0)
         [HideInInspector] _EjeV ("Eje V", Vector) = (0, 1, 0, 0)
         [HideInInspector] _Vista ("Vista de diagnóstico", Float) = 0
+        [HideInInspector] _RevelarColor ("Revelar color", Float) = 0
     }
 
     SubShader
@@ -31,6 +32,7 @@ Shader "Nia/GrabadoPiedra"
             float _Intensidad;
             float _Bisel;
             float _Vista;
+            float _RevelarColor;
         CBUFFER_END
 
         struct Attributes
@@ -76,6 +78,14 @@ Shader "Nia/GrabadoPiedra"
             // Área muestra la ubicación de la proyección sobre la malla.
             if (_Vista > 0.5)
                 return half4(0.7, 0, 0.7, 0.7);
+
+            if (_RevelarColor > 0.5)
+            {
+                float4 pixel = SAMPLE_TEXTURE2D(_Imagen, sampler_Imagen, uv);
+                float canalMinimo = min(pixel.r, min(pixel.g, pixel.b));
+                float alphaColor = pixel.a * smoothstep(0.025, 0.16, 1.0 - canalMinimo);
+                return half4(pixel.rgb * alphaColor, alphaColor);
+            }
 
             float2 paso = _Bisel * float2(-0.6, 0.8);
             float centro = Mascara(uv);

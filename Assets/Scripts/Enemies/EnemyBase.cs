@@ -22,10 +22,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     [Header("Recompensa")]
     [SerializeField] protected int diceDropAmount = 1;
-
-    [Header("Inventario de letras (opcional: se busca en la escena)")]
     [SerializeField] private InventarioLetras inventarioLetras;
-    private bool muerto;
 
     protected int currentHealth;
     protected Transform playerTransform;
@@ -46,7 +43,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void Update()
     {
-        if (muerto || playerTransform == null) return;
+        if (playerTransform == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
@@ -68,7 +65,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(int damageAmount)
     {
-        if (muerto || damageAmount <= 0) return;
+        if (currentHealth <= 0) return;
+
         currentHealth -= damageAmount;
         Debug.Log($"{gameObject.name} recibió {damageAmount} de daño. Vida restante: {currentHealth}");
 
@@ -80,26 +78,25 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void Die()
     {
-        if (muerto) return;
-
-        // Los dados con letras entregan una cara al inventario inferior.
-        // El resto de los enemigos conserva su recompensa de munición.
         if (TryGetComponent<DadoCara>(out var dadoLetras))
         {
             if (inventarioLetras == null)
                 inventarioLetras = FindFirstObjectByType<InventarioLetras>();
+
             if (inventarioLetras == null)
             {
-                Debug.LogError("Falta InventarioLetras en HUD/Inventario. El dado no se recoge.", this);
+                Debug.LogError("[NIA] Falta InventarioLetras en HUD/Inventario. El dado no se recogió.", this);
                 currentHealth = 1;
                 return;
             }
+
             if (inventarioLetras.EstaLleno)
             {
-                Debug.Log("Inventario de letras lleno. El dado permanece en la escena.", this);
+                Debug.LogWarning("[NIA] El inventario de letras está lleno. El dado sigue en la escena.", this);
                 currentHealth = 1;
                 return;
             }
+
             if (!inventarioLetras.RecogerDado(dadoLetras))
             {
                 currentHealth = 1;
@@ -111,9 +108,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             inventory.AddDice(diceDropAmount);
         }
 
-        muerto = true;
         Debug.Log($"{gameObject.name} ha sido derrotado.");
-
+        FindFirstObjectByType<GameManager>()?.RegistrarDadoDerrotado(transform);
         Destroy(gameObject);
     }
 

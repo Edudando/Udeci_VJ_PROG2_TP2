@@ -25,11 +25,37 @@ public sealed class GrabadoPiedra : MonoBehaviour
     private static readonly int VistaId = Shader.PropertyToID("_Vista");
     private static readonly int BiselId = Shader.PropertyToID("_Bisel");
     private static readonly int IntensidadId = Shader.PropertyToID("_Intensidad");
+    private static readonly int RevelarColorId = Shader.PropertyToID("_RevelarColor");
 
     private MeshRenderer piedra;
     private MeshRenderer capaGrabado;
     private Material materialGrabado;
     private Texture2D imagenActual;
+    private bool mostrarColor;
+
+    public void MostrarColor(bool visible)
+    {
+        mostrarColor = visible;
+        if (visible && vista != VistaGrabado.Imagen)
+            Debug.LogWarning("[NIA] Cambiá Vista de Grabado Piedra a Imagen para ver el color.", this);
+
+        if (materialGrabado == null)
+        {
+            if (visible)
+                Debug.LogWarning("[NIA] La palabra es correcta pero el grabado no está renderizado. Revisá Imagen, Shader Grabado y Punto Grabado.", this);
+            return;
+        }
+
+        AplicarColor();
+    }
+
+    private void AplicarColor()
+    {
+        if (materialGrabado.HasProperty(RevelarColorId))
+            materialGrabado.SetFloat(RevelarColorId, mostrarColor ? 1f : 0f);
+        else if (mostrarColor)
+            Debug.LogWarning("[NIA] La palabra es correcta, pero Shader Grabado apunta a una versión sin color. Actualizá el GrabadoPiedra.shader asignado.", this);
+    }
 
     public void MostrarImagen(string nombreArchivo)
     {
@@ -107,6 +133,7 @@ public sealed class GrabadoPiedra : MonoBehaviour
         capa.AddComponent<MeshFilter>().sharedMesh = malla;
 
         materialGrabado = new Material(shaderGrabado);
+        AplicarColor();
         Material[] materiales = new Material[malla.subMeshCount];
         for (int i = 0; i < materiales.Length; i++)
             materiales[i] = materialGrabado;

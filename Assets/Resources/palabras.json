@@ -26,7 +26,7 @@
       "imagen": "05_MEDUSA.png"
     },
     {
-      "palabra": "CAMIÓN",
+      "palabra": "CAMION",
       "dificultad": 1,
       "imagen": "06_CAMION.png"
     },
@@ -41,12 +41,12 @@
       "imagen": "08_HELADO.png"
     },
     {
-      "palabra": "PASTEL",
+      "palabra": "TORTA",
       "dificultad": 1,
       "imagen": "09_PASTEL.png"
     },
     {
-      "palabra": "TURRÓN",
+      "palabra": "TURRON",
       "dificultad": 1,
       "imagen": "10_TURRON.png"
     },
@@ -61,7 +61,7 @@
       "imagen": "12_GATITO.png"
     },
     {
-      "palabra": "DELFÍN",
+      "palabra": "DELFIN",
       "dificultad": 1,
       "imagen": "13_DELFIN.png"
     },
@@ -96,7 +96,7 @@
       "imagen": "19_GUSANO.png"
     },
     {
-      "palabra": "PÁJARO",
+      "palabra": "PAJARO",
       "dificultad": 1,
       "imagen": "20_PAJARO.png"
     },
@@ -106,7 +106,7 @@
       "imagen": "21_BOSQUE.png"
     },
     {
-      "palabra": "JARDÍN",
+      "palabra": "JARDIN",
       "dificultad": 1,
       "imagen": "22_JARDIN.png"
     },
@@ -171,7 +171,7 @@
       "imagen": "34_POMELO.png"
     },
     {
-      "palabra": "SANDÍA",
+      "palabra": "SANDIA",
       "dificultad": 1,
       "imagen": "35_SANDIA.png"
     },
@@ -196,12 +196,12 @@
       "imagen": "39_ACEITE.png"
     },
     {
-      "palabra": "SARTÉN",
+      "palabra": "SARTEN",
       "dificultad": 1,
       "imagen": "40_SARTEN.png"
     },
     {
-      "palabra": "CARTÓN",
+      "palabra": "CARTON",
       "dificultad": 1,
       "imagen": "41_CARTON.png"
     },
@@ -221,7 +221,7 @@
       "imagen": "44_PINCEL.png"
     },
     {
-      "palabra": "CRAYÓN",
+      "palabra": "CRAYON",
       "dificultad": 1,
       "imagen": "45_CRAYON.png"
     },
@@ -231,7 +231,7 @@
       "imagen": "46_TIJERA.png"
     },
     {
-      "palabra": "PÁGINA",
+      "palabra": "PAGINA",
       "dificultad": 1,
       "imagen": "47_PAGINA.png"
     },
@@ -246,7 +246,7 @@
       "imagen": "49_MESITA.png"
     },
     {
-      "palabra": "REGLÓN",
+      "palabra": "REGLON",
       "dificultad": 1,
       "imagen": "50_REGLON.png"
     }

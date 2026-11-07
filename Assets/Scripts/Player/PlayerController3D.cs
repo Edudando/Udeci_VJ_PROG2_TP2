@@ -195,6 +195,10 @@ public class PlayerController3D : MonoBehaviour
 
     private void TryInteract()
     {
+        if (TryGetComponent<InteraccionBasesFinal>(out var basesFinales) &&
+            basesFinales.IntentarInteractuar(firePoint))
+            return;
+            
         Collider[] hits = Physics.OverlapSphere(transform.position, interactRange, interactableLayer);
         foreach (var hit in hits)
         {

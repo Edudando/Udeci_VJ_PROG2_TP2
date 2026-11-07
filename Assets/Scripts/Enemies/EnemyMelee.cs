@@ -5,12 +5,13 @@
  * Materia: Programación 2
  * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
  * Función: Enemigo de combate cuerpo a cuerpo.
- * Explicación: Hereda de EnemyBase. Persigue directamente a Nia cuando 
- * entra en su área de detección y aplica daño continuo al estar en rango de ataque.
+ * Explicación: Hereda de EnemyBase. Persigue a Nia moviendo su Rigidbody
+ * en el plano horizontal para que la física resuelva los contactos.
  *********************************************************************************************/
 
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class EnemyMelee : EnemyBase
 {
     [Header("Configuración de Ataque Melee")]
@@ -18,20 +19,50 @@ public class EnemyMelee : EnemyBase
     [SerializeField] private float attackCooldown = 1.5f;
 
     private float lastAttackTime;
+    private Rigidbody cuerpo;
+    private Quaternion orientacionModelo;
+    private Vector3 velocidadPersecucion;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        cuerpo = GetComponent<Rigidbody>();
+        if (cuerpo == null || cuerpo.isKinematic)
+        {
+            Debug.LogError("[NIA] EnemyMelee necesita un Rigidbody en el mismo objeto, con Is Kinematic desactivado.", this);
+            return;
+        }
+
+        Quaternion giroInicial = Quaternion.Euler(0f, cuerpo.rotation.eulerAngles.y, 0f);
+        orientacionModelo = Quaternion.Inverse(giroInicial) * cuerpo.rotation;
+    }
+
+    // Esta variante ejecuta el comportamiento de EnemyBase en el paso de física.
+    protected override void Update() { }
+
+    private void FixedUpdate()
+    {
+        if (cuerpo == null || cuerpo.isKinematic) return;
+
+        velocidadPersecucion = Vector3.zero;
+        if (currentHealth > 0) base.Update();
+        cuerpo.linearVelocity = velocidadPersecucion;
+    }
+
+    private void OnDisable()
+    {
+        if (cuerpo != null && !cuerpo.isKinematic)
+            cuerpo.linearVelocity = Vector3.zero;
+    }
 
     protected override void ChasePlayer()
     {
-        if (playerTransform == null) return;
+        Vector3 direccion = playerTransform.position - cuerpo.position;
+        direccion.y = 0f;
+        if (direccion.sqrMagnitude < 0.000001f) return;
 
-        // Movimiento básico hacia la posición del jugador
-        Vector3 direction = (playerTransform.position - transform.position).normalized;
-        direction.y = 0f; // Mantiene el desplazamiento en el plano horizontal XZ
-
-        transform.position += direction * speed * Time.deltaTime;
-        if (direction != Vector3.zero)
-        {
-            transform.forward = direction;
-        }
+        velocidadPersecucion = direccion.normalized * speed;
+        cuerpo.MoveRotation(Quaternion.LookRotation(direccion) * orientacionModelo);
     }
 
     protected override void AttackPlayer()

@@ -21,11 +21,13 @@ public class InventarioLetras : MonoBehaviour
 
     private int[] ordenCaras;
     private string palabraObjetivo;
+    private int dadosRecogidos;
 
     public int Cantidad => caras.Count;
     public bool EstaLleno => casilleros == null || caras.Count >= casilleros.Length;
     public IReadOnlyList<Texture2D> Caras => caras;
     public IReadOnlyList<int> IndicesCaras => indicesCaras;
+    public string PalabraObjetivo => palabraObjetivo;
 
     private void Awake()
     {
@@ -77,8 +79,35 @@ public class InventarioLetras : MonoBehaviour
             Debug.LogError("Todos los dados deben tener la misma palabra que inició este inventario.", dado);
             return false;
         }
-        int indice = ordenCaras[Cantidad];
-        return AgregarCara(dado.ObtenerTexturaCara(indice), indice);
+        if (dadosRecogidos >= ordenCaras.Length) return false;
+        int indice = ordenCaras[dadosRecogidos];
+        if (!AgregarCara(dado.ObtenerTexturaCara(indice), indice)) return false;
+
+        dadosRecogidos++;
+        Debug.Log("Letra recogida: " + caras[Cantidad - 1].name +
+            ". Inventario: " + Cantidad + "/" + casilleros.Length, this);
+        return true;
+    }
+
+    public bool RetirarPrimera()
+    {
+        if (Cantidad == 0) return false;
+
+        caras.RemoveAt(0);
+        indicesCaras.RemoveAt(0);
+        for (int i = 0; i < Cantidad; i++)
+            MostrarCara(casilleros[i], sprites[caras[i]]);
+
+        Image ultimoOcupado = casilleros[Cantidad];
+        ultimoOcupado.sprite = null;
+        ultimoOcupado.enabled = false;
+        return true;
+    }
+
+    public bool DevolverAlFinal(Texture2D textura, int indiceCara)
+    {
+        if (indiceCara < 0 || indiceCara >= 6) return false;
+        return AgregarCara(textura, indiceCara);
     }
 
     // Prueba alternativas hasta completar los seis lugares: así no queda
@@ -124,12 +153,16 @@ public class InventarioLetras : MonoBehaviour
         }
         caras.Add(textura);
         indicesCaras.Add(indiceCara);
+        MostrarCara(destino, sprite);
+        return true;
+    }
+
+    private static void MostrarCara(Image destino, Sprite sprite)
+    {
         destino.sprite = sprite;
         destino.color = Color.white;
         destino.preserveAspect = true;
         destino.enabled = true;
-        Debug.Log("Letra recogida: " + textura.name + ". Inventario: " + Cantidad + "/" + casilleros.Length, this);
-        return true;
     }
 
     private void OnDestroy()
