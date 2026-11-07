@@ -3345,6 +3345,113 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7574464119691997499, guid: 229b2b685305d3a4b9c8bdbb569376e8, type: 3}
   m_PrefabInstance: {fileID: 182773279}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &183373817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 183373821}
+  - component: {fileID: 183373820}
+  - component: {fileID: 183373819}
+  - component: {fileID: 183373818}
+  m_Layer: 0
+  m_Name: ZonaTutorialLaberinto
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &183373818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183373817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57a52e70a509e64eb55e299bfedd13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialTeclasNia
+  mensajeInicio: '<b>CONTROLES DE NIA</b>
+
+    Flechas arriba y abajo: avanzar y
+    retroceder
+
+    Flechas izquierda y derecha: girar
+
+    <b>F</b>: disparar'
+  segundosInicio: 8
+  inventarioLetras: {fileID: 2139492433}
+  mensajeLaberinto: "<b>COLOC\xC1 LAS LETRAS</b>\nApunt\xE1 a una base y presion\xE1
+    <b>E</b> para colocar una letra.\nPresion\xE1 <b>E</b> otra vez para recuperarla."
+  segundosLaberinto: 8
+--- !u!54 &183373819
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183373817}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &183373820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183373817}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.95, y: 1.67, z: 3.25}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &183373821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183373817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -44.86, y: 0.63539, z: 47.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &184673479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34205,3 +34312,4 @@ SceneRoots:
   - {fileID: 1704608661}
   - {fileID: 687956335}
   - {fileID: 1379559833}
+  - {fileID: 183373821}
