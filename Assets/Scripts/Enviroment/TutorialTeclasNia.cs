@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(BoxCollider), typeof(Rigidbody))]
 public sealed class TutorialTeclasNia : MonoBehaviour
 {
     private const int DadosNecesarios = 6;
+    private enum MomentoAviso { EntradaLaberinto, AlEmpezar }
+    [SerializeField] private MomentoAviso momento = MomentoAviso.EntradaLaberinto;
 
     [Header("Aviso al empezar")]
     [SerializeField, TextArea(3, 5)] private string mensajeInicio =
@@ -31,25 +32,33 @@ public sealed class TutorialTeclasNia : MonoBehaviour
     private Text texto;
     private Coroutine ocultacion;
     private bool laberintoMostrado;
+    private static TutorialTeclasNia avisoVisible;
 
     private void Awake()
     {
-        GetComponent<BoxCollider>().isTrigger = true;
+        if (momento != MomentoAviso.EntradaLaberinto) return;
 
+        BoxCollider zona = GetComponent<BoxCollider>();
+        if (zona == null) zona = gameObject.AddComponent<BoxCollider>();
+        zona.isTrigger = true;
         Rigidbody cuerpo = GetComponent<Rigidbody>();
+        if (cuerpo == null) cuerpo = gameObject.AddComponent<Rigidbody>();
         cuerpo.isKinematic = true;
         cuerpo.useGravity = false;
     }
 
     private void Start()
     {
-        CrearInterfaz();
+        if (momento != MomentoAviso.AlEmpezar) return;
+
         MostrarAviso(mensajeInicio, segundosInicio);
+        Debug.Log("[NIA] Tutorial de inicio mostrado.", this);
     }
 
     private void OnTriggerEnter(Collider otro)
     {
-        if (!isActiveAndEnabled || laberintoMostrado || !otro.CompareTag("Player"))
+        if (momento != MomentoAviso.EntradaLaberinto || !isActiveAndEnabled ||
+            laberintoMostrado || !otro.CompareTag("Player"))
             return;
 
         if (inventarioLetras == null)
@@ -63,9 +72,10 @@ public sealed class TutorialTeclasNia : MonoBehaviour
 
     private void MostrarAviso(string mensaje, float segundos)
     {
-        if (ocultacion != null)
-            StopCoroutine(ocultacion);
+        if (avisoVisible != null) avisoVisible.CerrarAviso();
+        if (panel == null) CrearInterfaz();
 
+        avisoVisible = this;
         texto.text = mensaje;
         panel.SetActive(true);
         ocultacion = StartCoroutine(OcultarAviso(segundos));
@@ -74,11 +84,16 @@ public sealed class TutorialTeclasNia : MonoBehaviour
     private IEnumerator OcultarAviso(float segundos)
     {
         yield return new WaitForSecondsRealtime(segundos);
-        panel.SetActive(false);
         ocultacion = null;
+        CerrarAviso();
     }
 
     private void OnDisable()
+    {
+        CerrarAviso();
+    }
+
+    private void CerrarAviso()
     {
         if (ocultacion != null)
         {
@@ -88,6 +103,9 @@ public sealed class TutorialTeclasNia : MonoBehaviour
 
         if (panel != null)
             panel.SetActive(false);
+
+        if (avisoVisible == this)
+            avisoVisible = null;
     }
 
     private void OnDestroy()
