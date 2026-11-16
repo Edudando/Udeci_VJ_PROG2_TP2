@@ -25,6 +25,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealth
     private int currentHealth;
     [SerializeField, Min(0f)] private float invulnerabilityDuration = 0.75f;
 
+    [Header("Destello de daño")]
+    [SerializeField] private Renderer rendererPelo;
+    [SerializeField] private Material materialPeloRojo;
+    [SerializeField, Min(0.01f)] private float duracionDestello = 0.2f;
+
     [Header("Reaparición")]
     [SerializeField] private bool respawnOnDeath = true;
     [Tooltip("Vacío: reaparece en la posición y rotación iniciales de Nia.")]
@@ -53,6 +58,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealth
     private Quaternion initialRotation;
     private CharacterController controller;
     private Coroutine respawnRoutine;
+    private Coroutine rutinaDestelloPelo;
+    private Material[] materialesOriginalesPelo;
 
     private void Awake()
     {
@@ -70,6 +77,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealth
         if (!IsAlive || damageAmount <= 0 || Time.time < protectedUntil) return;
         currentHealth = Mathf.Max(0, currentHealth - damageAmount);
         protectedUntil = Time.time + invulnerabilityDuration;
+        MostrarDestelloPelo();
         PlayDamageSound();
         Debug.Log($"Nia recibió {damageAmount} de daño. Vida restante: {currentHealth}/{maxHealth}", this);
         NotifyHealth();
@@ -122,6 +130,45 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealth
         onRespawn.Invoke();
     }
 
+    private void MostrarDestelloPelo()
+    {
+        if (!isActiveAndEnabled || rendererPelo == null || materialPeloRojo == null)
+            return;
+
+        if (rutinaDestelloPelo != null)
+        {
+            StopCoroutine(rutinaDestelloPelo);
+        }
+        else
+        {
+            materialesOriginalesPelo = rendererPelo.sharedMaterials;
+            Material[] materialesRojos = new Material[materialesOriginalesPelo.Length];
+            for (int i = 0; i < materialesRojos.Length; i++)
+                materialesRojos[i] = materialPeloRojo;
+
+            rendererPelo.sharedMaterials = materialesRojos;
+        }
+
+        rutinaDestelloPelo = StartCoroutine(RestaurarPeloLuegoDelDestello());
+    }
+
+    private IEnumerator RestaurarPeloLuegoDelDestello()
+    {
+        yield return new WaitForSeconds(duracionDestello);
+        RestaurarPelo();
+    }
+
+    private void RestaurarPelo()
+    {
+        if (rutinaDestelloPelo == null) return;
+
+        rutinaDestelloPelo = null;
+        if (rendererPelo != null && materialesOriginalesPelo != null)
+            rendererPelo.sharedMaterials = materialesOriginalesPelo;
+
+        materialesOriginalesPelo = null;
+    }
+
     private void PlayDamageSound()
     {
 #if BARRERAS_FMOD
@@ -143,6 +190,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealth
 
     private void OnDisable()
     {
+        if (rutinaDestelloPelo != null)
+        {
+            StopCoroutine(rutinaDestelloPelo);
+            RestaurarPelo();
+        }
+
         if (respawnRoutine == null) return;
         StopCoroutine(respawnRoutine);
         respawnRoutine = null;

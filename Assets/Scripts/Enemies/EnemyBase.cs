@@ -1,15 +1,4 @@
-/**************************
- * Proyecto: BarrerasInvisibles
- * Universidad de la Ciudad de Buenos Aires
- * Periodo: 2do cuatrimestre 2026 
- * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
- * Función: Clase base abstracta para todos los enemigos del juego.
- * Explicación: Implementa IDamageable para gestionar la salud y recepción de daño,
- * y define el flujo básico del ciclo de vida del enemigo (detectar, atacar y morir),
- * permitiendo aplicar polimorfismo en tipos específicos de enemigos.
- *********************************************************************************************/
-
+using TMPro;
 using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour, IDamageable
@@ -23,6 +12,11 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [Header("Recompensa")]
     [SerializeField] protected int diceDropAmount = 1;
     [SerializeField] private InventarioLetras inventarioLetras;
+
+    [Header("Indicador de Vida")]
+    [SerializeField] private GameObject dadoVidaPrefab;
+    [SerializeField, Min(0f)] private float alturaSignoDanio = 1.2f;
+    [SerializeField, Min(0.01f)] private float duracionSignoDanio = 0.75f;
 
     protected int currentHealth;
     protected Transform playerTransform;
@@ -70,10 +64,38 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         currentHealth -= damageAmount;
         Debug.Log($"{gameObject.name} recibió {damageAmount} de daño. Vida restante: {currentHealth}");
 
+        currentHealth -= damageAmount;
+
+        // Muestra cantidad de Vida restante
+        if (damageAmount > 0)
+            MostrarDadoVida(currentHealth);
+
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    private void MostrarDadoVida(int vidaRestante)
+    {
+        if (dadoVidaPrefab == null) return;
+
+        Vector3 posicion = transform.position + Vector3.up * alturaSignoDanio;
+        Camera camara = Camera.main;
+        Quaternion rotacion = camara != null
+            ? camara.transform.rotation
+            : dadoVidaPrefab.transform.rotation;
+
+        GameObject dado = Instantiate(dadoVidaPrefab, posicion, rotacion);
+        TextMeshPro texto = dado.GetComponentInChildren<TextMeshPro>();
+
+        if (texto != null)
+        {
+            int vidas = Mathf.Clamp(vidaRestante, 0, 3);
+            texto.text = string.Join(" ", new string('●', vidas).ToCharArray());
+        }
+
+        Destroy(dado, duracionSignoDanio);
     }
 
     protected virtual void Die()

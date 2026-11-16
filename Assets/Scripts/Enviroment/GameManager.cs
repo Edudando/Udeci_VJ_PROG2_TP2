@@ -13,7 +13,36 @@ public class GameManager : MonoBehaviour
     [Header("Pista grabada")]
     [SerializeField] private GrabadoPiedra grabadoPiedra;
     [SerializeField, Min(0.01f)] private float profundidadPiedra = 2.5f;
-    [SerializeField, Min(0.01f)] private float duracionAscenso = 1.5f;
+    [SerializeField, Min(0.01f)] private float duracionAscenso = 4f;
+
+    [Header("Cinemática de la piedra")]
+    [SerializeField] private Camera camaraPrincipal;
+    [SerializeField] private Camera camLaberinto;
+    [SerializeField, Min(0f)] private float pausaAntesDeEmerger = 1.25f;
+    [SerializeField, Min(0f)] private float pausaAntesDeVolver = 0.5f;
+
+    private bool mostrandoCamLaberinto;
+    private Transform piedraEnAscenso;
+    private Vector3 posicionFinalPiedra;
+
+    [Header("Recompensa por capturar un dado de letra")]
+    [SerializeField] private PlayerHealth saludNia;
+    [SerializeField, Min(0)] private int vidasPorCaptura = 1;
+    [SerializeField] private GameObject signoCuracion;
+    [SerializeField, Min(0.01f)] private float duracionSignoCuracion = 0.8f;
+
+    [System.Serializable]
+    private class EnemigosPorDado
+    {
+        public ControladorPalabras dado;
+        public EnemyRanger[] enemigos;
+    }
+
+    [Header("EnemyRanger por sector")]
+    [Tooltip("Asigná un dado de letra y los EnemyRanger de su sector en cada elemento.")]
+    [SerializeField] private EnemigosPorDado[] enemigosPorSector;
+
+    private Coroutine rutinaSignoCuracion;
 
     [Header("Dificultad actual")]
     public int dificultadSeleccionada = 1;
@@ -24,6 +53,9 @@ public class GameManager : MonoBehaviour
     {
         if (grabadoPiedra != null && grabadoPiedra.gameObject.activeSelf)
             Debug.LogWarning("[NIA] Desactivá solo el objeto stone 1 en la escena para que empiece oculto.", grabadoPiedra);
+
+        if (camLaberinto != null && camLaberinto != camaraPrincipal)
+            camLaberinto.enabled = false;
 
         TextAsset jsonText = Resources.Load<TextAsset>("palabras");
         if (jsonText == null)
@@ -149,6 +181,8 @@ public class GameManager : MonoBehaviour
             if (dado == null || !dado.transform.IsChildOf(raizEnemigo)) continue;
             if (!dadosDerrotados.Add(raizEnemigo.GetInstanceID())) return;
 
+            AplicarRecompensaPorCaptura();
+            DerrotarEnemigosDelSector(raizEnemigo);
             Debug.Log($"[NIA] Dados letra derrotados: {dadosDerrotados.Count}/{CantidadDados}", this);
             if (dadosDerrotados.Count == CantidadDados)
             {
@@ -161,21 +195,115 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void DerrotarEnemigosDelSector(Transform raizDado)
+    {
+        if (enemigosPorSector == null) return;
+
+        foreach (EnemigosPorDado sector in enemigosPorSector)
+        {
+            if (sector == null || sector.dado == null || sector.enemigos == null ||
+                !sector.dado.transform.IsChildOf(raizDado))
+                continue;
+
+            foreach (EnemyRanger enemigo in sector.enemigos)
+            {
+                if (enemigo == null || !enemigo.IsAlive) continue;
+                enemigo.TakeDamage(Mathf.CeilToInt(enemigo.CurrentHealth));
+            }
+        }
+    }
+
+    private void AplicarRecompensaPorCaptura()
+    {
+        if (saludNia == null || !saludNia.IsAlive || vidasPorCaptura <= 0) return;
+
+        if (saludNia.CurrentHealth < saludNia.MaxHealth)
+            saludNia.healing(vidasPorCaptura);
+
+        if (signoCuracion == null || !isActiveAndEnabled) return;
+
+        if (rutinaSignoCuracion != null)
+            StopCoroutine(rutinaSignoCuracion);
+
+        signoCuracion.SetActive(true);
+        rutinaSignoCuracion = StartCoroutine(OcultarSignoCuracion());
+    }
+
+    private IEnumerator OcultarSignoCuracion()
+    {
+        yield return new WaitForSecondsRealtime(duracionSignoCuracion);
+        rutinaSignoCuracion = null;
+        if (signoCuracion != null)
+            signoCuracion.SetActive(false);
+    }
+
     private IEnumerator EmergerPiedra(Transform piedra)
     {
-        Vector3 posicionFinal = piedra.position;
-        Vector3 posicionEnterrada = posicionFinal - Vector3.up * profundidadPiedra;
+        piedraEnAscenso = piedra;
+        posicionFinalPiedra = piedra.position;
+        Vector3 posicionEnterrada = posicionFinalPiedra - Vector3.up * profundidadPiedra;
         piedra.position = posicionEnterrada;
         piedra.gameObject.SetActive(true);
 
-        float transcurrido = 0f;
-        while (transcurrido < duracionAscenso)
+        if (camaraPrincipal != null && camaraPrincipal.isActiveAndEnabled &&
+            camLaberinto != null && camLaberinto != camaraPrincipal &&
+            camLaberinto.gameObject.activeInHierarchy)
         {
-            transcurrido += Time.deltaTime;
-            float avance = Mathf.SmoothStep(0f, 1f, transcurrido / duracionAscenso);
-            piedra.position = Vector3.Lerp(posicionEnterrada, posicionFinal, avance);
-            yield return null;
+            mostrandoCamLaberinto = true;
+            camLaberinto.enabled = true;
+            camaraPrincipal.enabled = false;
+
+            if (pausaAntesDeEmerger > 0f)
+                yield return new WaitForSecondsRealtime(pausaAntesDeEmerger);
         }
-        piedra.position = posicionFinal;
+        else
+        {
+            Debug.LogWarning("[NIA] Asigná Main Camera y Cam_Laberinto al GameManager y dejá activos sus GameObjects.", this);
+        }
+
+        float duracion = Mathf.Max(0.01f, duracionAscenso);
+        float transcurrido = 0f;
+        while (piedra != null && transcurrido < duracion)
+        {
+            yield return null;
+            if (piedra == null) break;
+
+            transcurrido += Time.unscaledDeltaTime;
+            float avance = Mathf.SmoothStep(0f, 1f, transcurrido / duracion);
+            piedra.position = Vector3.Lerp(posicionEnterrada, posicionFinalPiedra, avance);
+        }
+
+        if (piedra != null)
+            piedra.position = posicionFinalPiedra;
+        piedraEnAscenso = null;
+
+        if (mostrandoCamLaberinto && pausaAntesDeVolver > 0f)
+            yield return new WaitForSecondsRealtime(pausaAntesDeVolver);
+
+        RestaurarCamaraPrincipal();
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        rutinaSignoCuracion = null;
+        if (signoCuracion != null)
+            signoCuracion.SetActive(false);
+
+        if (piedraEnAscenso != null)
+            piedraEnAscenso.position = posicionFinalPiedra;
+        piedraEnAscenso = null;
+        RestaurarCamaraPrincipal();
+    }
+
+    private void RestaurarCamaraPrincipal()
+    {
+        if (!mostrandoCamLaberinto) return;
+
+        mostrandoCamLaberinto = false;
+        if (camLaberinto != null)
+            camLaberinto.enabled = false;
+        if (camaraPrincipal != null)
+            camaraPrincipal.enabled = true;
     }
 }

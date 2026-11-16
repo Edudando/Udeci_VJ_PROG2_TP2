@@ -32,6 +32,11 @@ public class EnemyRanger : MonoBehaviour, IDamageable
     [SerializeField, Min(0.1f)] private float attackRange = 3f;
     [SerializeField, Min(0.01f)] private float rotationSpeed = 360f;
 
+    [Header("Indicador de Vida")]
+    [SerializeField] private GameObject dadoVidaPrefab;
+    [SerializeField, Min(0f)] private float alturaSignoDanio = 1.2f;
+    [SerializeField, Min(0.01f)] private float duracionSignoDanio = 0.75f;
+
     [Header("Disparo")]
     [SerializeField] private Transform firePoint;
     [Tooltip("Opcional. Solo modelo visual: el script controla movimiento y colisiones.")]
@@ -210,6 +215,10 @@ public class EnemyRanger : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        // Muestra cantidad de Vida restante
+        currentHealth = Mathf.Max(0f, currentHealth - damage);
+        MostrarDadoVida(Mathf.CeilToInt(currentHealth)-damage);
+
         if (!IsAlive || damage <= 0f) return;
         currentHealth = Mathf.Max(0f, currentHealth - damage);
         Debug.Log(name + " recibió " + damage + " de daño. Vida: " + currentHealth, this);
@@ -219,6 +228,28 @@ public class EnemyRanger : MonoBehaviour, IDamageable
         agent.enabled = false;
         foreach (Collider c in GetComponentsInChildren<Collider>()) c.enabled = false;
         Destroy(gameObject, deathDelay);
+    }
+
+    private void MostrarDadoVida(int vidaRestante)
+    {
+        if (dadoVidaPrefab == null) return;
+
+        Vector3 posicion = transform.position + Vector3.up * alturaSignoDanio;
+        Camera camara = Camera.main;
+        Quaternion rotacion = camara != null
+            ? camara.transform.rotation
+            : dadoVidaPrefab.transform.rotation;
+
+        GameObject dado = Instantiate(dadoVidaPrefab, posicion, rotacion);
+        TextMeshPro texto = dado.GetComponentInChildren<TextMeshPro>();
+
+        if (texto != null)
+        {
+            int vidas = Mathf.Clamp(vidaRestante, 0, 3);
+            texto.text = string.Join(" ", new string('●', vidas).ToCharArray());
+        }
+
+        Destroy(dado, duracionSignoDanio);
     }
 
     private void SetState(RangerState state)
