@@ -7,6 +7,9 @@ public sealed class PuzzlePalabraFinal : MonoBehaviour
     [Tooltip("Asigná las seis bases de izquierda a derecha, mirándolas desde Nia.")]
     [SerializeField] private BaseDadoFinal[] basesEnOrden = new BaseDadoFinal[6];
 
+    [SerializeField] private FinalVictoriaNia finalVictoria;
+
+    
     private GrabadoPiedra grabado;
     private bool resuelto;
 
@@ -41,6 +44,7 @@ public sealed class PuzzlePalabraFinal : MonoBehaviour
         grabado.MostrarColor(resuelto);
         if (resuelto)
             Debug.Log($"[NIA] Palabra correcta: {palabra}", this);
+            finalVictoria?.IniciarVictoria();
     }
 
     private string LeerPalabra(string palabra)
