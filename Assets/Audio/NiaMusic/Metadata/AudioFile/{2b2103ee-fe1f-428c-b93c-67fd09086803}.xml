@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{2b2103ee-fe1f-428c-b93c-67fd09086803}">
+		<property name="assetPath">
+			<value>the_mountain-kids-522483.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>81.528163265306119</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dd2d17fc-e27c-4034-8094-74e9d1f25522}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject signoCuracion;
     [SerializeField, Min(0.01f)] private float duracionSignoCuracion = 0.8f;
 
+
+    [Header("Sonidos")]
+    [SerializeField] private FMODUnity.EventReference sonidoPiedraEmergiendo;
+    [SerializeField] private FMODUnity.StudioEventEmitter emisorAmbiente;
+
     [System.Serializable]
     private class EnemigosPorDado
     {
@@ -255,10 +260,28 @@ public class GameManager : MonoBehaviour
 
             if (pausaAntesDeEmerger > 0f)
                 yield return new WaitForSecondsRealtime(pausaAntesDeEmerger);
+
         }
         else
         {
             Debug.LogWarning("[NIA] Asigná Main Camera y Cam_Laberinto al GameManager y dejá activos sus GameObjects.", this);
+        }
+
+
+   
+
+        var ambiente = emisorAmbiente != null
+        ? emisorAmbiente.EventInstance
+        : default(FMOD.Studio.EventInstance);
+
+        if (ambiente.isValid())
+        {
+            ambiente.setPaused(true);
+        }
+
+        if (!sonidoPiedraEmergiendo.IsNull)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(sonidoPiedraEmergiendo);
         }
 
         float duracion = Mathf.Max(0.01f, duracionAscenso);
@@ -271,6 +294,11 @@ public class GameManager : MonoBehaviour
             transcurrido += Time.unscaledDeltaTime;
             float avance = Mathf.SmoothStep(0f, 1f, transcurrido / duracion);
             piedra.position = Vector3.Lerp(posicionEnterrada, posicionFinalPiedra, avance);
+        }
+
+        if (ambiente.isValid())
+        {
+            ambiente.setPaused(false);
         }
 
         if (piedra != null)
