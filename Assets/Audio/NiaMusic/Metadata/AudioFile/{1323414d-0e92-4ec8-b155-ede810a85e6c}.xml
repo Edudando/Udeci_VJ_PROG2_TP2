@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{1323414d-0e92-4ec8-b155-ede810a85e6c}">
+		<property name="assetPath">
+			<value>soundreality-sci-fi-gun-shot-312659.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.968</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dd2d17fc-e27c-4034-8094-74e9d1f25522}</destination>
+		</relationship>
+	</object>
+</objects>

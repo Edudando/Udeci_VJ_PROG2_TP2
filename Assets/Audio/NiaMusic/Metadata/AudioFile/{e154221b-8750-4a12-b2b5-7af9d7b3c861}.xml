@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e154221b-8750-4a12-b2b5-7af9d7b3c861}">
+		<property name="assetPath">
+			<value>dragon-studio-fireworks-13-419033.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>6.024</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dd2d17fc-e27c-4034-8094-74e9d1f25522}</destination>
+		</relationship>
+	</object>
+</objects>

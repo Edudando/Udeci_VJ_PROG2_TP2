@@ -45,6 +45,9 @@ public class PlayerController3D : MonoBehaviour
     [SerializeField, Min(1)] private int initialBulletCount = 10;
     [SerializeField] private ProjectileDataSO activeProjectileData;
 
+    [Header("Audio de disparo")]
+    [SerializeField] private FMODUnity.EventReference shootEvent;
+
     private readonly List<GameObject> bulletInstances = new List<GameObject>();
     private Transform bulletPoolRoot;
     private Transform inactiveCreationRoot;
@@ -280,6 +283,11 @@ public class PlayerController3D : MonoBehaviour
         projectile.SetProjectileData(activeProjectileData);
         projectileObj.SetActive(true);
         diceInventory.UseDie();
+        projectileObj.SetActive(true);
+        diceInventory.UseDie();
+
+        if (!shootEvent.IsNull)
+            FMODUnity.RuntimeManager.PlayOneShot(shootEvent, spawnPosition);
         if (animator != null)
             animator.SetTrigger("Shoot");
         if (debugShooting)

@@ -5683,7 +5683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &226896911
 Transform:
   m_ObjectHideFlags: 0
@@ -12920,6 +12920,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6801955793903224657, guid: e02251ffb836ec94f88405b29ad170be, type: 3}
   initialBulletCount: 10
   activeProjectileData: {fileID: 11400000, guid: 889b3222b370f22418c0c6e8f289845e, type: 2}
+  shootEvent:
+    Guid:
+      Data1: 1423744605
+      Data2: 1279337382
+      Data3: 1193634459
+      Data4: -724574375
+    Path: event:/Shoot
   recoilVisual: {fileID: 0}
   recoilAngle: -10
   recoilResetDelay: 0.25
@@ -24942,7 +24949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8611441520705628849, guid: 0520e268e72d34844b52ad3a8b2473ff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8992048931936743435, guid: 0520e268e72d34844b52ad3a8b2473ff, type: 3}
       propertyPath: m_LocalScale.x
@@ -25153,6 +25160,7 @@ GameObject:
   - component: {fileID: 1146138835}
   - component: {fileID: 1146138834}
   - component: {fileID: 1146138833}
+  - component: {fileID: 1146138836}
   m_Layer: 0
   m_Name: FuegosVictoria
   m_TagString: Untagged
@@ -25188,6 +25196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FinalVictoriaNia
   escenaMenuPrincipal: MenuPrincipal
+  audioFuegos: {fileID: 1146138836}
   esperaTrasColorear: 0.8
   separacionEntreEstallidos: 0.45
   duracionChispas: 1.45
@@ -29999,6 +30008,37 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1146138836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146138831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -900663342
+      Data2: 1169951577
+      Data3: -710654566
+      Data4: -183680797
+    Path: event:/Fuegos_Finales
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1146253598
 PrefabInstance:
   m_ObjectHideFlags: 0

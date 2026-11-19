@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{30a21393-ec98-49a0-a8d1-b5ee249ebfcb}">
 		<property name="name">
-			<value>EmerjePiedra</value>
+			<value>Emerje_Piedra</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -27,6 +27,9 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{8fbd47d2-7824-4b15-8bbc-c5af270b458b}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{728d2c21-32b4-4e7d-9ba4-01d64663e050}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{c5c9b832-b18e-4997-ad8e-286a4086034e}">
@@ -73,7 +76,7 @@
 	</object>
 	<object class="SingleSound" id="{f2411f57-68fd-4736-81ea-e10a491092fc}">
 		<property name="length">
-			<value>180</value>
+			<value>4</value>
 		</property>
 		<property name="volume">
 			<value>9.5</value>

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public sealed class FinalVictoriaNia : MonoBehaviour
 {
     [SerializeField] private string escenaMenuPrincipal;
+    [SerializeField] private FMODUnity.StudioEventEmitter audioFuegos;
     [SerializeField, Min(0f)] private float esperaTrasColorear = 0.8f;
     [SerializeField, Min(0f)] private float separacionEntreEstallidos = 0.45f;
     [SerializeField, Min(0.1f)] private float duracionChispas = 1.45f;
@@ -73,6 +74,8 @@ public sealed class FinalVictoriaNia : MonoBehaviour
         yield return new WaitForSecondsRealtime(esperaTrasColorear);
 
         fuegos.Play(false);
+        audioFuegos?.Play();
+        
         Vector3 lateral = transform.right * separacionLateral;
         EmitirEstallido(transform.position - lateral, new Color(1f, 0.72f, 0.17f));
         yield return new WaitForSecondsRealtime(separacionEntreEstallidos);
