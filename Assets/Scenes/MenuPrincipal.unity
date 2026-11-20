@@ -1400,8 +1400,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Universidad de la Ciudad de Bs As\nProgramaci\xF3n de Videojuegos 2\n\nProfesor
-    \nMarcos Caba\xF1a\n\nTrabajo de \nEduardo Ortega"
+  m_text: "Universidad de la Ciudad de Bs As\nProgramaci\xF3n de Videojuegos 2\n\nProfesores\nMarcos
+    Caba\xF1a\nNahuel Pascale Varela\nJos\xE9 Heibaum\n\nTrabajo de \nEduardo Ortega"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
