@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Programador: Eduardo Ortega
  * Función: Proyectil de dado lanzado por el jugador.
  * Explicación: Se desplaza en linea recta utilizando la configuración 
  * provista por un ProjectileDataSO, inflige daño a entidades con 

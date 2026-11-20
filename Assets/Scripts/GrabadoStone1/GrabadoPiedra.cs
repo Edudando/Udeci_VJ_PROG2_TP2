@@ -1,3 +1,14 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Carga la imagen de la pista desde Resources/images y la
+ * proyecta sobre la piedra mediante un shader. Usa el punto de grabado
+ * para ubicar y orientar la imagen. Permite revelar su color cuando
+ * se resuelve el acertijo y ocultarlo si se desarma la solución.
+ *********************************************************************************************/
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;

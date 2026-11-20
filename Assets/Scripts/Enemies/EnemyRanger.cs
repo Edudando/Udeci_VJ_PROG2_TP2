@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: Control de movimiento, ataques (Melee y Ranged) e interacción de Nia.
  * Explicación: Gestiona el desplazamiento 3D, interactúa con pedestales mediante E,
  * dispara proyectiles de dados usando ObjectPool/ProjectileDataSO al hacer clic izquierdo 

@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/NiaMusic/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639306461061514694
+  lastModified: 639307146998534714
   FileSizes:
   - Name: Desktop
-    Value: 5838208
+    Value: 5838496
   Exists: 1
 --- !u!114 &-893511098032217205
 MonoBehaviour:
@@ -62,10 +62,10 @@ MonoBehaviour:
   Path: Assets/Audio/NiaMusic/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639306461061525846
+  lastModified: 639307146998976025
   FileSizes:
   - Name: Desktop
-    Value: 956
+    Value: 1032
   Exists: 1
 --- !u!114 &-541992985016128701
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -893511098032217205}
   cacheVersion: 131861
-  cacheTime: 639306461061525846
+  cacheTime: 639307146998976025
   SerializableEventsDict:
   - key: event:/Ambiente
     index: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 8000
+  Length: 6024
 --- !u!114 &6063209971983681432
 MonoBehaviour:
   m_ObjectHideFlags: 0

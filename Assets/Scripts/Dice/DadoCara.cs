@@ -1,3 +1,13 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Asigna y permite consultar la textura de la letra de cada cara
+ * del dado. Cuando las seis caras tienen textura, permite sortear una
+ * cara y obtener su índice y su textura.
+ *********************************************************************************************/
 using UnityEngine;
 
 public class DadoCara : MonoBehaviour

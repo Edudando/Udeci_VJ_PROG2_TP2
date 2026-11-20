@@ -1,3 +1,16 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Selecciona al azar una palabra de seis letras de palabras.json,
+ * prioriza la dificultad elegida y verifica que existan las texturas.
+ * Carga la palabra en los dados y su imagen en la piedra. Registra cada
+ * captura, recupera vida de Nia y derrota a los EnemyRanger del sector.
+ * Al capturar los seis dados, coordina el ascenso de la piedra, el cambio
+ * temporal de cámara y el sonido de la cinemática con FMOD.
+ *********************************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

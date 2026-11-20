@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: Administrador del inventario de dados del jugador.
  * Explicación: Gestiona la cantidad actual de dados disponibles para 
  * disparar en combate Ranged o utilizar en pedestales de puzles, 

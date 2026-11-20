@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: Gestión de la salud y daño del personaje del jugador (Nia).
  * Explicación: Implementa la interfaz IDamageable para recibir daño de los 
  * enemigos, administrar la salud máxima y controlar el evento de derrota/respawn.

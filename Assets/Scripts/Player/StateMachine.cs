@@ -1,3 +1,13 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Define la interfaz IState y gestiona el estado activo.
+ * Al cambiar de estado, ejecuta Exit() en el anterior y Enter() en
+ * el nuevo. Cada llamada a Update() se delega al estado activo.
+ *********************************************************************************************/
 public interface IState
 {
     void Enter();

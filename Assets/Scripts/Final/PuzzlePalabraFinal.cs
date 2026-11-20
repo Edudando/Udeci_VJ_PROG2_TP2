@@ -1,3 +1,14 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Lee de izquierda a derecha las letras de las seis bases
+ * del laberinto y compara el resultado con la palabra objetivo.
+ * Colorea el grabado de la piedra cuando la palabra coincide y
+ * restaura su aspecto original si la solución se desarma.
+ *********************************************************************************************/
 using UnityEngine;
 
 [DisallowMultipleComponent]

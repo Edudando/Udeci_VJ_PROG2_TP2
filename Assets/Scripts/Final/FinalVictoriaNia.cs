@@ -1,3 +1,14 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Coordina la celebración de victoria tras colorear el grabado.
+ * Desactiva los controles configurados, genera tres estallidos de fuegos
+ * artificiales con partículas y reproduce su sonido con FMOD.
+ * Al terminar, libera el cursor y carga la escena del menú principal.
+ *********************************************************************************************/
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;

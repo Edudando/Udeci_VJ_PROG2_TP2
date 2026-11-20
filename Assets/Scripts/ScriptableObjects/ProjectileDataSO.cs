@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: ScriptableObject con datos de configuración del proyectil.
  * Explicación: Contenedor de datos que define la velocidad, el daño y el tipo 
  * de área/minijuego (Lengua, Matemática, Ciencias) para parametrizar

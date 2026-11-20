@@ -1,3 +1,12 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Periodo: 2do cuatrimestre 2026 
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Verifica que una palabra de seis letras tenga las texturas necesarias
+ * y muestra cada letra en una cara del dado.
+ *********************************************************************************************/
 using System.Collections.Generic;
 using UnityEngine;
 

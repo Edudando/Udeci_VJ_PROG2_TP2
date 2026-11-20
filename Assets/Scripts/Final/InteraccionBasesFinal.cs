@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: Detecta la base a la que apunta Nia con FirePoint.
  *********************************************************************************************/
 using UnityEngine;

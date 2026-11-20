@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Programador: Eduardo Ortega
  * Función: Pool de objetos genérico para reutilizar instancias en memoria.
  * Explicación: Gestiona la creación y reutilización de proyectiles u otros objetos,
  * evitando la instanciación/destrucción constante para optimizar

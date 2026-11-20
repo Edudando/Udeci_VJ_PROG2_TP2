@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: Enemigo de combate cuerpo a cuerpo.
  * Explicación: Hereda de EnemyBase. Persigue a Nia moviendo su Rigidbody
  * en el plano horizontal para que la física resuelva los contactos.

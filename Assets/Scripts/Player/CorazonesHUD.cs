@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: Representación de la vida de Nia mediante corazones 3D.
  * Explicación: Escucha los cambios de PlayerHealth y activa u oculta
  * Vida_1, Vida_2 y Vida_3. Restaura los corazones al curarse o reaparecer.

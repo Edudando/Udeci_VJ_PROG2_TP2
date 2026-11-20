@@ -1,3 +1,15 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Muestra avisos temporales sobre los controles de Nia.
+ * Al iniciar la partida, explica cómo moverse con las flechas y disparar
+ * con F. Al entrar al laberinto con los seis dados de letras, indica
+ * cómo colocar y recuperar letras con E. Este segundo aviso aparece
+ * una sola vez.
+ *********************************************************************************************/
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;

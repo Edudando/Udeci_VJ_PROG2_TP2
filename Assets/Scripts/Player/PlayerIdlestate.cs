@@ -1,3 +1,14 @@
+/**************************
+ * Proyecto: BarrerasInvisibles
+ * Universidad de la Ciudad de Buenos Aires
+ * Período: 2.º cuatrimestre de 2026
+ * Materia: Programación 2
+ * Programador: Eduardo Ortega
+ * Función: Implementa los estados de reposo, movimiento y muerte de Nia.
+ * Mantiene la gravedad en reposo y alterna entre reposo y movimiento
+ * según las teclas de control. Al morir, detiene el movimiento de Nia
+ * y, si revive, vuelve al estado de reposo.
+ *********************************************************************************************/
 using UnityEngine;
 
 // --- ESTADO IDLE (REPOSO) ---

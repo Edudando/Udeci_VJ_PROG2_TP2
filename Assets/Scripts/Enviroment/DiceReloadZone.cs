@@ -3,7 +3,7 @@
  * Universidad de la Ciudad de Buenos Aires
  * Periodo: 2do cuatrimestre 2026 
  * Materia: Programación 2
- * Integrantes: Ariana Ruiz, Eduardo Ortega, Ruth Wulf
+ * Integrantes: Eduardo Ortega
  * Función: Recargar los dados de Nia al acercarse al banco.
  * Explicación: Detecta la entrada en un radio de proximidad y completa
  * el cargador una vez por visita. No requiere colliders de tipo trigger.
